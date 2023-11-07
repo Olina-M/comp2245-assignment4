@@ -1,5 +1,4 @@
 <?php
-
 $superheroes = [
   [
       "id" => 1,
@@ -63,10 +62,55 @@ $superheroes = [
   ], 
 ];
 
+$searchQuery = isset($_GET["query"]) ? $_GET["query"] : "";
+$htmlOutput = ''; // Initialize the variable
+
+if (!empty($searchQuery)) {
+    // Handle the case when a search query is provided
+    $filteredSuperheroes = [];
+
+    foreach ($superheroes as $superhero) {
+        // Check if the alias or name contains the search query (case-insensitive)
+        if (stripos($superhero['alias'], $searchQuery) !== false || stripos($superhero['name'], $searchQuery) !== false) {
+            $filteredSuperheroes[] = $superhero;
+        }
+    }
+
+    if (!empty($filteredSuperheroes)) {
+        $htmlOutput = '<ul>';
+
+        foreach ($filteredSuperheroes as $superhero) {
+            $htmlOutput .= '<li>';
+            $htmlOutput .= '<h3>' . $superhero['alias'] . '</h3>';
+            $htmlOutput .= '<h4>' . $superhero['name'] . '</h4>';
+            $htmlOutput .= '<p>' . $superhero['biography'] . '</p>';
+            $htmlOutput .= '</li>';
+        }
+
+        $htmlOutput .= '</ul>';
+    } else {
+        // If no superheroes match the search query, provide a message
+        $htmlOutput = 'Superhero not found';
+    }
+} else {
+    ?>
+    <ul>
+    <?php foreach ($superheroes as $superhero): ?>
+        <li><?= $superhero['alias']; ?></li>
+    <?php endforeach; ?>
+    </ul>
+    <?php
+}
+
+// Set the response header to indicate that the response is HTML
+header('Content-Type: text/html');
+
+// Echo or print the HTML response
+echo $htmlOutput;
 ?>
 
-<ul>
-<?php foreach ($superheroes as $superhero): ?>
-  <li><?= $superhero['alias']; ?></li>
-<?php endforeach; ?>
-</ul>
+
+
+
+
+
