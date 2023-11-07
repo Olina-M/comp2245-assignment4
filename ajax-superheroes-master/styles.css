@@ -1,0 +1,37 @@
+header h1 {
+    margin: 0 auto;
+    background-color: #5DADE2;
+    text-align: center;
+    color: white;
+    padding: 25px;
+}
+
+input {
+    width: 500px;
+    padding: 5px;
+    background-color: white;
+}
+button {
+    background-color: #b03a2e;
+    border-radius: 5px;
+    padding: 5px;
+    text-decoration: none;
+    color: white;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body {
+    background-color: #E5E7E9;
+}
+.line {
+    width: 100%;
+    border-top: 1px solid black; /* You can change the color, width, and style */
+}
+section.hero-search {
+    width: 730px;
+}
